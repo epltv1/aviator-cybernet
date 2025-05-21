@@ -1,7 +1,7 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
-  background: linear-gradient(to bottom, #1c2526, #0a0f14);
+  background: linear-gradient(to bottom, #1a1a1a, #2c2c2c);
   color: #ffffff;
   display: flex;
   justify-content: center;
@@ -29,7 +29,7 @@ h1 {
 
 .game-area {
   position: relative;
-  background: #12151a;
+  background: #1e1e1e;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
@@ -37,7 +37,7 @@ h1 {
 
 canvas {
   display: block;
-  background: url('assets/aviator-bg.png') no-repeat center/cover;
+  background: url('assets/game-bg.png') no-repeat center/cover;
   width: 100%;
   max-width: 600px;
   height: 400px;
@@ -51,7 +51,7 @@ canvas {
   font-size: 4.5em;
   font-weight: 700;
   color: #ffffff;
-  text-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff4d4d;
+  text-shadow: 0 0 10px #ff5555, 0 0 20px #ff5555;
   animation: pulse 1.5s ease-in-out infinite;
 }
 
@@ -66,7 +66,7 @@ canvas {
 }
 
 .bet-panel {
-  background: #1c2128;
+  background: #2a2a2a;
   padding: 15px;
   border-radius: 10px;
   width: 100%;
@@ -86,9 +86,8 @@ canvas {
   font-size: 1em;
   border: none;
   border-radius: 5px;
-  background: #2a2f3a;
+  background: #3a3a3a;
   color: #ffffff;
-  margin-bottom: 10px;
 }
 
 .bet-panel button {
@@ -97,25 +96,25 @@ canvas {
   font-size: 1em;
   border: none;
   border-radius: 5px;
-  background: #ff4d4d;
+  background: #28a745;
   color: #ffffff;
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
 }
 
 .bet-panel button:disabled {
-  background: #666;
+  background: #555;
   cursor: not-allowed;
 }
 
 .bet-panel button:hover:not(:disabled) {
-  background: #e03e3e;
+  background: #218838;
   transform: scale(1.05);
 }
 
 .status {
   font-size: 0.9em;
-  color: #ff4d4d;
+  color: #ff5555;
   margin-top: 10px;
 }
 
