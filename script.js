@@ -6,47 +6,48 @@ const statusDisplays = [document.getElementById('status1'), document.getElementB
 const betAmountInputs = [document.getElementById('betAmount1'), document.getElementById('betAmount2')];
 const placeBetButtons = [document.getElementById('placeBet1'), document.getElementById('placeBet2')];
 const cashOutButtons = [document.getElementById('cashOut1'), document.getElementById('cashOut2')];
-const takeoffSound = document.getElementById('takeoffSound');
-const crashSound = document.getElementById('crashSound');
-const cashoutSound = document.getElementById('cashoutSound');
 
-let balance = [100, 100]; // Separate balances for each bet
+let balance = [100, 100];
 let bets = [0, 0];
 let multiplier = 1;
 let isGameRunning = false;
-let planeX = canvas.width / 2;
-let planeY = canvas.height - 50;
 let time = 0;
-let planeImage = new Image();
-planeImage.src = 'assets/plane.png';
+let lineX = canvas.width / 2;
+let lineY = canvas.height - 50;
+let linePath = [];
 let activeBets = [false, false];
 let animationFrame;
 
-function drawPlane() {
+function drawLine() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.save();
-  ctx.translate(planeX, planeY);
-  ctx.rotate((Math.PI / 180) * (time * 3 - 45)); // Rotate plane
-  ctx.drawImage(planeImage, -25, -25, 50, 50); // Center image
-  ctx.restore();
+  ctx.beginPath();
+  ctx.strokeStyle = '#ff5555';
+  ctx.lineWidth = 4;
+  ctx.moveTo(canvas.width / 2, canvas.height - 50);
+  linePath.forEach(point => ctx.lineTo(point.x, point.y));
+  ctx.stroke();
 }
 
 function updateGame() {
   if (!isGameRunning) return;
 
   time += 0.05;
-  multiplier = Math.exp(time * 0.2); // Exponential growth like Betfalme
-  planeX = canvas.width / 2 + Math.sin(time * 0.4) * 150; // Wider curved path
-  planeY = canvas.height - 50 - time * 60; // Faster upward movement
+  multiplier = Math.exp(time * 0.2); // Exponential growth like Pakakumi
+  lineX = canvas.width / 2 + Math.sin(time * 0.4) * 150; // Curved path
+  lineY = canvas.height - 50 - time * 60; // Upward movement
+  linePath.push({ x: lineX, y: lineY });
 
-  if (Math.random() < 0.01 || multiplier > 50 || planeY < -50) {
-    crashSound.play();
+  if (linePath.length > 200) {
+    linePath.shift();
+  }
+
+  if (Math.random() < 0.01 || multiplier > 50 || lineY < -50) {
     endGame(false);
     return;
   }
 
   multiplierDisplay.textContent = `${multiplier.toFixed(2)}x`;
-  drawPlane();
+  drawLine();
   animationFrame = requestAnimationFrame(updateGame);
 }
 
@@ -69,9 +70,9 @@ function placeBet(index) {
     isGameRunning = true;
     multiplier = 1;
     time = 0;
-    planeX = canvas.width / 2;
-    planeY = canvas.height - 50;
-    takeoffSound.play();
+    lineX = canvas.width / 2;
+    lineY = canvas.height - 50;
+    linePath = [];
     updateGame();
   }
 }
@@ -83,7 +84,6 @@ function cashOut(index) {
   balance[index - 1] += winnings;
   balanceDisplays[index - 1].textContent = balance[index - 1].toFixed(2);
   statusDisplays[index - 1].textContent = `Cashed out at ${multiplier.toFixed(2)}x! Won $${winnings.toFixed(2)}`;
-  cashoutSound.play();
   activeBets[index - 1] = false;
   bets[index - 1] = 0;
   placeBetButtons[index - 1].disabled = false;
@@ -109,4 +109,4 @@ function endGame(didCashOut) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-planeImage.onload = drawPlane;
+drawLine();
