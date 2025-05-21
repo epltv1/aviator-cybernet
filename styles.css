@@ -1,26 +1,30 @@
 body {
   font-family: 'Roboto', sans-serif;
+  margin: 0;
+  background: linear-gradient(to bottom, #1c2526, #0a0f14);
+  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  margin: 0;
-  background: linear-gradient(to bottom, #1c2526, #0a0f14);
-  color: #ffffff;
 }
 
 .container {
-  text-align: center;
-  padding: 20px;
   max-width: 700px;
   width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 h1 {
-  font-size: 2.5em;
+  font-size: 2em;
   color: #ffffff;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  margin-bottom: 20px;
 }
 
 .game-area {
@@ -33,7 +37,10 @@ h1 {
 
 canvas {
   display: block;
-  background: url('https://betfalme.ke/_next/static/media/aviator-bg.f0f7b7d1.png') no-repeat center/cover;
+  background: url('assets/aviator-bg.png') no-repeat center/cover;
+  width: 100%;
+  max-width: 600px;
+  height: 400px;
 }
 
 .multiplier {
@@ -41,7 +48,7 @@ canvas {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 4em;
+  font-size: 4.5em;
   font-weight: 700;
   color: #ffffff;
   text-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff4d4d;
@@ -52,52 +59,64 @@ canvas {
   margin-top: 20px;
 }
 
-.game-info {
+.bet-section {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  font-size: 1.1em;
+  justify-content: center;
+  gap: 20px;
 }
 
-.game-info p {
-  margin: 0;
+.bet-panel {
+  background: #1c2128;
+  padding: 15px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+}
+
+.bet-panel p {
+  margin: 0 0 10px;
+  font-size: 1em;
   color: #cccccc;
 }
 
-.bet-controls {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-input, button {
-  padding: 12px 20px;
+.bet-panel input {
+  width: 100%;
+  padding: 10px;
   font-size: 1em;
   border: none;
   border-radius: 5px;
   background: #2a2f3a;
   color: #ffffff;
+  margin-bottom: 10px;
 }
 
-input {
-  width: 120px;
-  background: #1c2128;
-}
-
-button {
+.bet-panel button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
   background: #ff4d4d;
+  color: #ffffff;
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
 }
 
-button:disabled {
+.bet-panel button:disabled {
   background: #666;
   cursor: not-allowed;
 }
 
-button:hover:not(:disabled) {
+.bet-panel button:hover:not(:disabled) {
   background: #e03e3e;
   transform: scale(1.05);
+}
+
+.status {
+  font-size: 0.9em;
+  color: #ff4d4d;
+  margin-top: 10px;
 }
 
 @keyframes pulse {
@@ -111,21 +130,20 @@ button:hover:not(:disabled) {
     padding: 10px;
   }
   h1 {
-    font-size: 1.8em;
+    font-size: 1.5em;
   }
   canvas {
     width: 100%;
     height: auto;
   }
   .multiplier {
-    font-size: 2.5em;
+    font-size: 3em;
   }
-  .bet-controls {
+  .bet-section {
     flex-direction: column;
     align-items: center;
   }
-  input, button {
-    width: 100%;
-    max-width: 200px;
+  .bet-panel {
+    max-width: 100%;
   }
 }
