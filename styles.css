@@ -1,109 +1,131 @@
 body {
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Roboto', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  color: #e0e0e0;
+  background: linear-gradient(to bottom, #1c2526, #0a0f14);
+  color: #ffffff;
 }
 
 .container {
   text-align: center;
-  padding: 30px;
-  background: #0f0c29;
-  border: 4px solid #00ffcc;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
-  animation: neonGlow 2s ease-in-out infinite alternate;
+  padding: 20px;
+  max-width: 700px;
+  width: 100%;
 }
 
 h1 {
-  color: #00ffcc;
-  text-shadow: 0 0 10px #00ffcc, 0 0 20px #ff007a;
-  font-size: 2em;
+  font-size: 2.5em;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   margin-bottom: 20px;
 }
 
-.game-info {
-  margin: 20px 0;
-  display: flex;
-  justify-content: space-around;
-  font-size: 0.9em;
-}
-
-.game-info p {
-  margin: 0;
-  color: #ff007a;
-  text-shadow: 0 0 5px #ff007a;
+.game-area {
+  position: relative;
+  background: #12151a;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 canvas {
-  border: 2px solid #00ffcc;
-  background: #16213e;
-  border-radius: 10px;
-  margin: 10px 0;
+  display: block;
+  background: url('https://betfalme.ke/_next/static/media/aviator-bg.f0f7b7d1.png') no-repeat center/cover;
 }
 
-#graphCanvas {
-  background: rgba(0, 0, 0, 0.2);
+.multiplier {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4em;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff4d4d;
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
 .controls {
   margin-top: 20px;
 }
 
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 1.1em;
+}
+
+.game-info p {
+  margin: 0;
+  color: #cccccc;
+}
+
+.bet-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
 input, button {
-  padding: 12px;
-  margin: 5px;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.8em;
-  border: 2px solid #00ffcc;
+  padding: 12px 20px;
+  font-size: 1em;
+  border: none;
   border-radius: 5px;
-  background: #1a1a2e;
-  color: #e0e0e0;
+  background: #2a2f3a;
+  color: #ffffff;
 }
 
 input {
   width: 120px;
+  background: #1c2128;
 }
 
 button {
-  background: #ff007a;
+  background: #ff4d4d;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: background 0.2s, transform 0.2s;
 }
 
 button:disabled {
-  background: #555;
-  border-color: #555;
+  background: #666;
   cursor: not-allowed;
 }
 
 button:hover:not(:disabled) {
+  background: #e03e3e;
   transform: scale(1.05);
-  box-shadow: 0 0 15px #ff007a;
 }
 
-@keyframes neonGlow {
-  from {
-    box-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
-  }
-  to {
-    box-shadow: 0 0 20px rgba(0, 255, 204, 0.8);
-  }
+@keyframes pulse {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.1); }
+  100% { transform: translate(-50%, -50%) scale(1); }
 }
 
 @media (max-width: 600px) {
   .container {
-    padding: 15px;
+    padding: 10px;
+  }
+  h1 {
+    font-size: 1.8em;
   }
   canvas {
     width: 100%;
     height: auto;
   }
-  h1 {
-    font-size: 1.5em;
+  .multiplier {
+    font-size: 2.5em;
+  }
+  .bet-controls {
+    flex-direction: column;
+    align-items: center;
+  }
+  input, button {
+    width: 100%;
+    max-width: 200px;
   }
 }
