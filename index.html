@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cybernet</title>
+  <meta name="description" content="Play Aviator with Cybernet, the ultimate gaming platform. Cash out before the plane crashes!">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+</head>
+<body>
+  <div class="container">
+    <h1>Aviator Game</h1>
+    <div class="game-info">
+      <p>Multiplier: <span id="multiplier">1.00x</span></p>
+      <p>Balance: $<span id="balance">100</span></p>
+      <p>Status: <span id="status">Waiting...</span></p>
+    </div>
+    <canvas id="gameCanvas" width="600" height="400"></canvas>
+    <div class="controls">
+      <input type="number" id="betAmount" placeholder="Enter bet amount" min="1">
+      <button id="placeBet" onclick="placeBet()">Place Bet</button>
+      <button id="cashOut" onclick="cashOut()" disabled>Cash Out</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
