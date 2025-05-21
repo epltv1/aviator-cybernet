@@ -1,7 +1,5 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
-const graphCanvas = document.getElementById('graphCanvas');
-const graphCtx = graphCanvas.getContext('2d');
 const multiplierDisplay = document.getElementById('multiplier');
 const balanceDisplay = document.getElementById('balance');
 const statusDisplay = document.getElementById('status');
@@ -16,45 +14,31 @@ let balance = 100;
 let bet = 0;
 let multiplier = 1;
 let isGameRunning = false;
-let planeX = 0;
+let planeX = canvas.width / 2;
 let planeY = canvas.height - 50;
+let time = 0;
 let planeImage = new Image();
 planeImage.src = 'assets/plane.png';
-let multiplierHistory = [];
 let animationFrame;
 
 function drawPlane() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(planeImage, planeX, planeY, 50, 50);
-}
-
-function drawGraph() {
-  graphCtx.clearRect(0, 0, graphCanvas.width, graphCanvas.height);
-  graphCtx.beginPath();
-  graphCtx.moveTo(0, graphCanvas.height);
-  multiplierHistory.forEach((m, i) => {
-    const x = (i / (multiplierHistory.length - 1)) * graphCanvas.width;
-    const y = graphCanvas.height - (m / 10) * graphCanvas.height;
-    graphCtx.lineTo(x, y);
-  });
-  graphCtx.strokeStyle = '#00ffcc';
-  graphCtx.lineWidth = 2;
-  graphCtx.stroke();
+  ctx.save();
+  ctx.translate(planeX, planeY);
+  ctx.rotate((Math.PI / 180) * (time * 2 - 45)); // Rotate plane based on time
+  ctx.drawImage(planeImage, -25, -25, 50, 50); // Center image
+  ctx.restore();
 }
 
 function updateGame() {
   if (!isGameRunning) return;
 
-  multiplier += 0.02;
-  planeX += 2.5;
-  planeY -= 1.5;
-  multiplierHistory.push(multiplier);
+  time += 0.05;
+  multiplier = 1 + time * time * 0.1; // Quadratic growth for multiplier
+  planeX = canvas.width / 2 + Math.sin(time * 0.5) * 100; // Curved horizontal path
+  planeY = canvas.height - 50 - time * 50; // Upward movement
 
-  if (multiplierHistory.length > 100) {
-    multiplierHistory.shift();
-  }
-
-  if (Math.random() < 0.008 || multiplier > 15) {
+  if (Math.random() < 0.01 || multiplier > 20 || planeY < -50) {
     crashSound.play();
     endGame(false);
     return;
@@ -62,7 +46,6 @@ function updateGame() {
 
   multiplierDisplay.textContent = `${multiplier.toFixed(2)}x`;
   drawPlane();
-  drawGraph();
   animationFrame = requestAnimationFrame(updateGame);
 }
 
@@ -79,9 +62,9 @@ function placeBet() {
   statusDisplay.textContent = 'Taking Off!';
   isGameRunning = true;
   multiplier = 1;
-  planeX = 0;
+  time = 0;
+  planeX = canvas.width / 2;
   planeY = canvas.height - 50;
-  multiplierHistory = [1];
   placeBetButton.disabled = true;
   cashOutButton.disabled = false;
   takeoffSound.play();
@@ -109,7 +92,6 @@ function endGame(didCashOut) {
     bet = 0;
   }
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawGraph();
 }
 
 planeImage.onload = drawPlane;
