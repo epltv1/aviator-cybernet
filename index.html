@@ -12,20 +12,29 @@
 </head>
 <body>
   <div class="container">
-    <h1>Cybernet Aviator</h1>
+    <header>
+      <h1>Cybernet</h1>
+    </header>
     <div class="game-area">
       <canvas id="gameCanvas" width="600" height="400"></canvas>
       <div class="multiplier" id="multiplier">1.00x</div>
     </div>
     <div class="controls">
-      <div class="game-info">
-        <p>Balance: $<span id="balance">100</span></p>
-        <p>Status: <span id="status">Waiting...</span></p>
-      </div>
-      <div class="bet-controls">
-        <input type="number" id="betAmount" placeholder="Bet Amount" min="1">
-        <button id="placeBet" onclick="placeBet()">Bet</button>
-        <button id="cashOut" onclick="cashOut()" disabled>Cash Out</button>
+      <div class="bet-section">
+        <div class="bet-panel">
+          <p>Balance: $<span id="balance1">100</span></p>
+          <input type="number" id="betAmount1" placeholder="Bet Amount" min="1">
+          <button id="placeBet1" onclick="placeBet(1)">Bet</button>
+          <button id="cashOut1" onclick="cashOut(1)" disabled>Cash Out</button>
+          <p class="status" id="status1">Waiting...</p>
+        </div>
+        <div class="bet-panel">
+          <p>Balance: $<span id="balance2">100</span></p>
+          <input type="number" id="betAmount2" placeholder="Bet Amount" min="1">
+          <button id="placeBet2" onclick="placeBet(2)">Bet</button>
+          <button id="cashOut2" onclick="cashOut(2)" disabled>Cash Out</button>
+          <p class="status" id="status2">Waiting...</p>
+        </div>
       </div>
     </div>
   </div>
