@@ -1,32 +1,53 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Press Start 2P', cursive;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  background-color: #f0f0f0;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #e0e0e0;
 }
 
 .container {
   text-align: center;
-  padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  background: #0f0c29;
+  border: 4px solid #00ffcc;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+  animation: neonGlow 2s ease-in-out infinite alternate;
 }
 
 h1 {
-  color: #333;
+  color: #00ffcc;
+  text-shadow: 0 0 10px #00ffcc, 0 0 20px #ff007a;
+  font-size: 2em;
+  margin-bottom: 20px;
 }
 
 .game-info {
   margin: 20px 0;
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.9em;
+}
+
+.game-info p {
+  margin: 0;
+  color: #ff007a;
+  text-shadow: 0 0 5px #ff007a;
 }
 
 canvas {
-  border: 2px solid #333;
-  background-color: #87ceeb;
+  border: 2px solid #00ffcc;
+  background: #16213e;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+#graphCanvas {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .controls {
@@ -34,24 +55,55 @@ canvas {
 }
 
 input, button {
-  padding: 10px;
+  padding: 12px;
   margin: 5px;
-  font-size: 16px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8em;
+  border: 2px solid #00ffcc;
+  border-radius: 5px;
+  background: #1a1a2e;
+  color: #e0e0e0;
+}
+
+input {
+  width: 120px;
 }
 
 button {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  background: #ff007a;
   cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 button:disabled {
-  background-color: #cccccc;
+  background: #555;
+  border-color: #555;
   cursor: not-allowed;
 }
 
 button:hover:not(:disabled) {
-  background-color: #45a049;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ff007a;
+}
+
+@keyframes neonGlow {
+  from {
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.8);
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+  }
+  canvas {
+    width: 100%;
+    height: auto;
+  }
+  h1 {
+    font-size: 1.5em;
+  }
 }
